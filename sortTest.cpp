@@ -23,6 +23,7 @@ void sortWithHeapAscending(T arr[], int size);
 
 int main()
 {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	int * nrs1 = new int[STOPSIZE];
 	int * nrs2 = new int[STOPSIZE];
 
@@ -58,6 +59,8 @@ int main()
         std::cout << std::setw(width) << std::right << n << std::endl;
     }
 
+	std::cout  << std::endl << "Done Sorting" << std::endl;
+
     /* deallocating memory */
     delete [] nrs1;
     delete [] nrs2;
@@ -89,6 +92,25 @@ template <typename T>
 void bubbleSortAscending(T arr[], int size)
 {
 	/* Your implementation of bubble sort */
+
+	bool swap = true;
+	for (int a = 0; a < size; a++) {
+		swap = false;
+		for (int i = 0; i < (size-1); i++) {
+			if (arr[i] > arr[i + 1]) {
+				//swap
+				T temp = arr[i];
+				arr[i] = arr[i + 1];
+				arr[i + 1] = temp;
+				swap = true;
+			}
+		}
+		if (swap == false) {
+			break;
+		}
+
+	}
+
 }
 
 template <typename T>
@@ -97,5 +119,16 @@ void sortWithHeapAscending(T arr[], int size)
 	/* Your implementation */
 	// Make sure that your heap does not expand
 	dHeap<T> heap(2, size);
+	
+	for (int i = 0; i < size; i++)
+	{
+		heap.push(arr[i]);
+	}
+	
+	//i = (size - 1); i > 0;
+	for (int i = (size - 1); i >= 0; i--)
+	{
+		arr[i] = heap.pop();
+	}
 
 }
